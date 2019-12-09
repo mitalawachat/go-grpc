@@ -94,3 +94,13 @@
 | API Oriented - `what`(no constraints - free design) | CRUD Oriented (Create-Retrieve-Update-Delete / POST-GET-PUT-DELETE) |
 | Code Generation through Protocol Buffers in any language - 1st class citizen | Code generation through OpenAPI/Swagger (add-on) - 2nd class citizen |
 | RPC based - gRPC does the plumbing for us | HTTP verbs based - we have to write the plumbing or use a 3rd party library |
+
+## GETTING STARTED
+
+* Install Golang: <https://golang.org/doc/install>
+  * Make sure that the go binaries are in your `PATH`
+  * `go version`
+* Install VSCode: <https://code.visualstudio.com/>
+* Install `protoc`
+* `go get -u google.golang.org/grpc`
+* `go get -u github.com/golang/protobuf/protoc-gen-go`
