@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/mitalawachat/go-grpc/01-code-generation-test/messagepb"
+	"github.com/mitalawachat/go-grpc/01-code-generation/messagepb"
 	"google.golang.org/grpc"
 )
 

@@ -3,7 +3,7 @@
 ## GETTING STARTED
 
 * Move into project directory
-  * `cd 01-code-generation-test/`
+  * `cd 01-code-generation/`
 
 ## PROTO
 
