@@ -1,8 +1,8 @@
-# SERVER STREAMING RPC
+# CLIENT STREAMING RPC
 
 ## GETTING STARTED
 
-* **Server Streaming RPC** enables client to send **many** messages to the server, and will receive **one** response from the server; at any point
+* **Client Streaming RPC** enables client to send **many** messages to the server, and will receive **one** response from the server; server can send response at any point (no need to wait till all messages are received from client)
 * Client streaming are suited for:
   * Client needs to send lot of data (big data)
   * When the Server processing is expensive and should happen as the client sends data
