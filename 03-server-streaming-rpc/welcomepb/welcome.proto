@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package welcome;
+option go_package="welcomepb";
+
+message Person {
+    string first_name = 1;
+    string last_name = 2;
+}
+
+message WelcomeManyTimesRequest {
+    Person person = 1;
+}
+
+message WelcomeManyTimesResponse {
+    string result = 1;
+}
+
+service WelcomeService {
+    rpc WelcomeManyTimes(WelcomeManyTimesRequest) returns (stream WelcomeManyTimesResponse) {};
+}
