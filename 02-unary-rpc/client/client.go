@@ -29,8 +29,8 @@ func main() {
 
 	welcomeResponse, welcomeError := client.Welcome(context.Background(), welcomeRequest)
 	if welcomeError != nil {
-		log.Fatalf("failed to call welcome service: %v", welcomeError)
+		log.Fatalf("failed to call service: %v", welcomeError)
 	}
 
-	fmt.Printf("Welcome Response: %v \n", welcomeResponse)
+	fmt.Printf("Received Response: %v \n", welcomeResponse)
 }

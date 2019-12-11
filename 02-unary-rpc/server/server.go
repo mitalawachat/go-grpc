@@ -14,7 +14,7 @@ type server struct {
 }
 
 func (*server) Welcome(ctx context.Context, request *welcomepb.WelcomeRequest) (*welcomepb.WelcomeResponse, error) {
-	fmt.Printf("Welcome Request: %v \n", request)
+	fmt.Printf("Received Request: %v \n", request)
 
 	firstName := request.GetPerson().GetFirstName()
 	lastName := request.GetPerson().GetLastName()

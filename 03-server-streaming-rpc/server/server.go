@@ -14,7 +14,7 @@ type server struct {
 }
 
 func (*server) WelcomeManyTimes(request *welcomepb.WelcomeManyTimesRequest, stream welcomepb.WelcomeService_WelcomeManyTimesServer) error {
-	fmt.Printf("Welcome Request: %v \n", request)
+	fmt.Printf("Received Request: %v \n", request)
 
 	firstName := request.GetPerson().GetFirstName()
 	lastName := request.GetPerson().GetLastName()

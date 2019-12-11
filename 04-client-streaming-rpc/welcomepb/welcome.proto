@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package welcome;
+option go_package="welcomepb";
+
+message Person {
+    string first_name = 1;
+    string last_name = 2;
+}
+
+message LongWelcomeRequest {
+    Person person = 1;
+}
+
+message LongWelcomeResponse {
+    string result = 1;
+}
+
+service WelcomeService {
+    rpc LongWelcome(stream LongWelcomeRequest) returns (LongWelcomeResponse) {};
+}

@@ -17,11 +17,13 @@
   * `protoc welcomepb/welcome.proto --go_out=plugins=grpc:.`
 * Open generated `welcome.pb.go` inside `welcomepb` package
   * Server specific code:
-    * `RegisterWelcomeServiceServer(s *grpc.Server, srv WelcomeServiceServer)`
+    * `WelcomeServiceServer`
     * `WelcomeServiceServer` - `WelcomeManyTimes(*WelcomeManyTimesRequest, WelcomeService_WelcomeManyTimesServer) error`
+    * `RegisterWelcomeServiceServer(s *grpc.Server, srv WelcomeServiceServer)`
   * Client specific code:
-    * `NewWelcomeServiceClient(cc *grpc.ClientConn) WelcomeServiceClient`
+    * `WelcomeServiceClient`
     * `WelcomeServiceClient` - `WelcomeManyTimes(ctx context.Context, in *WelcomeManyTimesRequest, opts ...grpc.CallOption) (WelcomeService_WelcomeManyTimesClient, error)`
+    * `NewWelcomeServiceClient(cc *grpc.ClientConn) WelcomeServiceClient`
 
 ## SERVER
 
@@ -35,6 +37,6 @@
   * Do steps mentioned in `01-code-generation`
   * Create request object of `welcomepb.WelcomeManyTimesRequest`
   * Request welcome service using `client.WelcomeManyTimes`
-  * Iterate over response utill you receive error
+  * Iterate over response until you receive error
     * If error **is** `io.EOF` then successfully received all response from server
     * If error **is not** `io.EOF` then something went wrong

@@ -30,7 +30,7 @@ func main() {
 
 	stream, welcomeError := client.WelcomeManyTimes(context.Background(), welcomeRequest)
 	if welcomeError != nil {
-		log.Fatalf("failed to call welcome service: %v", welcomeError)
+		log.Fatalf("failed to call service: %v", welcomeError)
 	}
 
 	for {
@@ -39,8 +39,8 @@ func main() {
 			break
 		}
 		if messageError != nil {
-			log.Fatalf("error while reading welcome stream: %v", messageError)
+			log.Fatalf("error while reading stream: %v", messageError)
 		}
-		fmt.Printf("Welcome Response: %v \n", message.GetResult())
+		fmt.Printf("Received Response: %v \n", message.GetResult())
 	}
 }

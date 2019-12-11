@@ -12,8 +12,12 @@
 * Generate `message.pb.go` using below command
   * `protoc messagepb/message.proto --go_out=plugins=grpc:.`
 * Open generated `message.pb.go` inside `messagepb` package
-  * Contains `MessageServiceServer` - `RegisterMessageServiceServer(s *grpc.Server, srv MessageServiceServer)`
-  * Contains `MessageServiceClient` - `NewMessageServiceClient(cc *grpc.ClientConn) MessageServiceClient`
+  * Server specific code:
+    * `MessageServiceServer`
+    * `RegisterMessageServiceServer(s *grpc.Server, srv MessageServiceServer)`
+  * Client specific code:
+    * `MessageServiceClient`
+    * `NewMessageServiceClient(cc *grpc.ClientConn) MessageServiceClient`
 
 ## SERVER
 

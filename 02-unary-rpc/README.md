@@ -18,11 +18,13 @@
   * `protoc welcomepb/welcome.proto --go_out=plugins=grpc:.`
 * Open generated `welcome.pb.go` inside `welcomepb` package
   * Server specific code:
-    * `RegisterWelcomeServiceServer(s *grpc.Server, srv WelcomeServiceServer)`
+    * `WelcomeServiceServer`
     * `WelcomeServiceServer` - `Welcome(context.Context, *WelcomeRequest) (*WelcomeResponse, error)`
+    * `RegisterWelcomeServiceServer(s *grpc.Server, srv WelcomeServiceServer)`
   * Client specific code:
-    * `NewWelcomeServiceClient(cc *grpc.ClientConn) WelcomeServiceClient`
+    * `WelcomeServiceClient`
     * `WelcomeServiceClient` - `Welcome(ctx context.Context, in *WelcomeRequest, opts ...grpc.CallOption) (*WelcomeResponse, error)`
+    * `NewWelcomeServiceClient(cc *grpc.ClientConn) WelcomeServiceClient`
 
 ## SERVER
 
