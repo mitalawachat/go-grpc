@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"log"
 	"time"
 
-	"github.com/mitalawachat/go-grpc/04-client-streaming-rpc/welcomepb"
+	"github.com/mitalawachat/go-grpc/05-bi-directional-streaming-rpc/welcomepb"
 	"google.golang.org/grpc"
 )
 
@@ -21,12 +22,21 @@ func main() {
 
 	client := welcomepb.NewWelcomeServiceClient(connection)
 
-	stream, streamError := client.LongWelcome(context.Background())
+	stream, streamError := client.WelcomeEveryone(context.Background())
 	if streamError != nil {
 		log.Fatalf("failed to call service: %v", streamError)
 	}
 
-	requests := []*welcomepb.LongWelcomeRequest{
+	waitChannel := make(chan struct{})
+
+	go sendMessages(stream)
+	go receiveMessages(stream, waitChannel)
+
+	<-waitChannel
+}
+
+func sendMessages(stream welcomepb.WelcomeService_WelcomeEveryoneClient) {
+	requests := []*welcomepb.WelcomeEveryoneRequest{
 		{
 			Person: &welcomepb.Person{
 				FirstName: "Steve",
@@ -46,7 +56,6 @@ func main() {
 			},
 		},
 	}
-
 	for i, request := range requests {
 		sendError := stream.Send(request)
 		if sendError != nil {
@@ -56,11 +65,19 @@ func main() {
 		fmt.Printf("Sent %d message \n", i+1)
 		time.Sleep(1000 * time.Millisecond)
 	}
+	stream.CloseSend()
+}
 
-	message, messageError := stream.CloseAndRecv()
-	if messageError != nil {
-		log.Fatalf("failed to receive data: %v", messageError)
+func receiveMessages(stream welcomepb.WelcomeService_WelcomeEveryoneClient, waitChannel chan struct{}) {
+	for {
+		message, messageError := stream.Recv()
+		if messageError == io.EOF {
+			close(waitChannel)
+			break
+		}
+		if messageError != nil {
+			log.Fatalf("error while reading stream: %v", messageError)
+		}
+		fmt.Printf("Received Response: %v \n", message.GetResult())
 	}
-
-	fmt.Printf("Received Response: %v \n", message.GetResult())
 }
