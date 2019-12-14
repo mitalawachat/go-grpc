@@ -95,7 +95,7 @@
 | Code Generation through Protocol Buffers in any language - 1st class citizen | Code generation through OpenAPI/Swagger (add-on) - 2nd class citizen |
 | RPC based - gRPC does the plumbing for us | HTTP verbs based - we have to write the plumbing or use a 3rd party library |
 
-## GETTING STARTED
+## ENVIRONMENT SETUP
 
 * Install Golang: <https://golang.org/doc/install>
   * Make sure that the go binaries are in your `PATH`
@@ -104,3 +104,26 @@
 * Install `protoc`
 * `go get -u google.golang.org/grpc`
 * `go get -u github.com/golang/protobuf/protoc-gen-go`
+
+## EXAMPLES
+
+* [Code Generation using `.proto` file](01-code-generation/README.md)
+* [Unary RPC](02-unary-rpc/README.md)
+* [Server Streaming RPC](03-server-streaming-rpc/README.md)
+* [Client Streaming RPC](04-client-streaming-rpc/README.md)
+* [Bi-Drectional RPC](05-bi-directional-streaming-rpc/README.md)
+
+## GRPC ERROR CODES
+
+* **Guide:** <https://grpc.io/docs/guides/error/>
+* If application needs to return extra information on top of an error code, it was use the metadata context.
+* Examples: <http://avi.im/grpc-errors/>
+
+## DEADLINES
+
+* Deadlines allow gRPC clients to specify how long they are willing to wait for an RPC to complete before the RPC is terminated with the error `DEADLINE_EXCEEDED`
+* gRPC documentation recommends you set a deadline for all client RPC calls
+* `Server` should check if the deadline has exceeded and cancel the work it is doing
+* Deadlines are propogated across if gRPC calls are chained
+  * A -> B -> C (deadline for A is passed to B and then passed to C)
+* **Blog:** <https://grpc.io/blog/deadlines/>
