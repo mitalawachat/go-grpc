@@ -117,7 +117,11 @@
 
 * **Guide:** <https://grpc.io/docs/guides/error/>
 * If application needs to return extra information on top of an error code, it was use the metadata context.
-* Examples: <http://avi.im/grpc-errors/>
+* **Examples:** <http://avi.im/grpc-errors/>
+* `google.golang.org/grpc/codes`
+  * Package codes defines the canonical error codes used by gRPC. It is consistent across various languages.
+* `google.golang.org/grpc/status`
+  * Package status implements errors returned by gRPC.
 
 ## DEADLINES
 
@@ -125,5 +129,19 @@
 * gRPC documentation recommends you set a deadline for all client RPC calls
 * `Server` should check if the deadline has exceeded and cancel the work it is doing
 * Deadlines are propogated across if gRPC calls are chained
-  * A -> B -> C (deadline for A is passed to B and then passed to C)
+  * **A -> B -> C** (deadline for **A** is passed to **B** and then passed to **C**)
 * **Blog:** <https://grpc.io/blog/deadlines/>
+
+## SSL
+
+* SSL allows communication to be secure end-to-end and ensuring no Man-In-The-Middle attack can be performed
+* This is done by generating SSL certificates
+* Two ways of using SSL:
+  * 1 way verification (e.g. Browser -> WebServer) (Encryption)
+  * 2 way verification (e.g. SSL Authentication) (Authentication)
+* Guide: <https://www.grpc.io/docs/guides/auth/>
+
+## gRPC REFLECTION
+
+* Server reflection is an extension for servers to assist clients in runtime construction of requests (without having `.proto` file with the client)
+* Use `reflection.Register(s *grpc.Server)` from `google.golang.org/grpc/reflection` to register your service
